@@ -1,0 +1,65 @@
+{
+  "tasks": [
+    {
+      "text": "Tebogo Mahlohela",
+      "day": "Developer",
+      "reminder": false,
+      "id": 1
+    },
+    {
+      "text": "Santo Raphael",
+      "day": "Mathematician",
+      "reminder": false,
+      "id": 2
+    },
+    {
+      "text": "Siyabonga Madonsela",
+      "day": "Cloud Architect",
+      "reminder": false,
+      "id": 3
+    },
+    {
+      "text": "Pascoa Segotla",
+      "day": "Cloud Architect",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "Kuboni Maseko",
+      "day": "Sotware Developer",
+      "reminder": false,
+      "id": 5
+    },
+    {
+      "text": "Katlego Kgoadi",
+      "day": "Programmer",
+      "reminder": false,
+      "id": 6
+    },
+    {
+      "text": "Siyabonga Hadebe",
+      "day": "Sotware Developer",
+      "reminder": false,
+      "id": 7
+    },
+    {
+      "text": "Fortunate Ntsoane",
+      "day": "UX/UI Expert",
+      "reminder": false,
+      "id": 8
+    },
+    {
+      "text": "Sandile Msimang",
+      "day": "Rapper aka Young Stunner",
+      "reminder": false,
+      "id": 9
+    },
+    {
+      "text": "Raymond Tebogo",
+      "day": "DevOps and UX/UI",
+      "reminder": false,
+      "avatar": {},
+      "id": 12
+    }
+  ]
+}
