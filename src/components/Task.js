@@ -1,7 +1,9 @@
 import { FaTrash } from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
-const Task = ({ avatar, task, onDelete, onToggle }) => {
+const Task = ({ avatar, task, onEdit, onDelete, onToggle }) => {
+
   return (
     <div 
       className={`task ${task.reminder ? 'reminder' : ''}`} 
@@ -15,11 +17,13 @@ const Task = ({ avatar, task, onDelete, onToggle }) => {
       <h3>
         {task.text}{' '}
         <span className='svg_icons'>
-          <FaPen
-            style={{ color: '#43464B', cursor: 'pointer' }}
-            className='svg_Edit'
-            // onClick={() => onEdit(task.id)}
-          />
+          {/* <Link to={`EditTask/${id}`}> */}
+            <FaPen
+              style={{ color: '#43464B', cursor: 'pointer' }}
+              className='svg_Edit'
+              onClick={() => onEdit(task.id)}
+            />
+          {/* </Link> */}
           <FaTrash
             style={{ color: '#43464B', cursor: 'pointer' }}
             onClick={() => onDelete(task.id)}

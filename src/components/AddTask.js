@@ -1,13 +1,43 @@
 import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
-import { FaImages } from 'react-icons/fa'
-// import { Axios } from 'axios'
+import { FaImages } from 'react-icons/fa';
+import axios from 'axios';
 
 const AddTask = ({ onAdd }) => {
     const [text, setText] = useState('')
     const [day , setDay] = useState('')
     const [reminder, setReminder] = useState(false)
-    const [avatar, setAvatar] = useState(null);
+    const [avatar, setAvatar] = useState(null)
+
+    const handleImageChange = (e) => {
+        setAvatar(e.target.files [0]);
+        console.log(e.target.files[0]);
+    };
+
+    const handleImageUpload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('image', avatar);
+      
+            const response = await axios.post('http://localhost:5000/tasks', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+               
+            console.log('Your Image was uploaded successfully, Danko:', response.data);
+            } catch (error) {
+            console.error('There was an Error uploading image, please try again:', error);
+        }
+    }
+
+    const handleText = (e) => {
+        setText(e.target.value);
+    }
+
+    const handleJob = (e) => {
+        setDay(e.target.value);
+    }
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -23,6 +53,7 @@ const AddTask = ({ onAdd }) => {
 
         if (!avatar) {
             alert('Please add your avatar image')
+            return
         }
 
         onAdd({ text, day, reminder, avatar }) //Pass in object with text, day, reminders. check to see whether values are assigned
@@ -32,8 +63,6 @@ const AddTask = ({ onAdd }) => {
         setReminder(false) //call and set Reminder to false beacuse Boolean data type
         setAvatar('')
     }
-
-
 
     return (
         <form className='add-form' onSubmit={onSubmit} >
@@ -59,31 +88,32 @@ const AddTask = ({ onAdd }) => {
                 <input
                     className="input__image-choose"
                     type="file"
+                    alt='image in avatar'
                     display="flex"
                     placeholder="Upload an Avatar"
-                    // value={avatar}
                     name="myImage"
-                    onChange={(event) => {
-                    console.log(event.target.files[0]);
-                    setAvatar(event.target.files[0]);
-                    }}
+                    accept={"image/*"}
+                    onChange={handleImageChange}
+                    style={{  cursor: "pointer" }}
                 />
-                <FaPlus className='input__image-plus'/>                
+                <FaPlus className='input__image-plus'
+                    style={{ cursor: "pointer" }}
+                />                
             </div>
             <div className='form-control'>
                 <input 
                     type='text' 
                     placeholder='Full Names' 
-                    value={text} 
-                    onChange={(e) => setText(e.target.value)}                
+                    value={text || ""} 
+                    onChange={handleText}                
                 />
             </div>
             <div className='form-control'>
                 <input 
                     type='text' 
                     placeholder='Job Title' 
-                    value={day} 
-                    onChange={(e) => setDay(e.target.value)}
+                    value={day || ""} 
+                    onChange={handleJob}
                 />
             </div>
             {/* <div className='form-control form-control-check'>
@@ -95,7 +125,9 @@ const AddTask = ({ onAdd }) => {
             <input 
                 type='submit' 
                 value='Add Member' 
-                className='btn btn-block' 
+                className='btn btn-block'
+                onClick={handleImageUpload}
+                // style={editMode ? 'Update' : 'Add'}
             />
         </form>
     )
